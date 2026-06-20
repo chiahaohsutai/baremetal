@@ -14,8 +14,8 @@ use panic_probe as _;
 #[unsafe(link_section = ".bi_entries")]
 #[used]
 pub static METADATA: [binary_info::EntryAddr; 4] = [
-    binary_info::rp_program_name!(c"Blinky"),
-    binary_info::rp_program_description!(c"Toggle onborad LED on and off"),
+    binary_info::rp_program_name!(c"Onboard LED Blinky"),
+    binary_info::rp_program_description!(c"Toggle onboard LED on and off"),
     binary_info::rp_cargo_version!(),
     binary_info::rp_program_build_attribute!(),
 ];
