@@ -3,14 +3,13 @@
 
 use cyw43::aligned_bytes;
 use cyw43_pio::{PioSpi, RM2_CLOCK_DIVIDER};
-use defmt::{unwrap, info};
 use embassy_executor::Spawner;
 use embassy_rp::gpio::{Level, Output};
 use embassy_rp::peripherals::{DMA_CH0, PIO0};
 use embassy_rp::{binary_info, bind_interrupts, dma, pio};
 use embassy_time::{Duration, Timer};
 use static_cell::StaticCell;
-use {defmt_rtt as _, panic_probe as _};
+use panic_probe as _;
 
 #[unsafe(link_section = ".bi_entries")]
 #[used]
@@ -63,16 +62,13 @@ async fn main(spawner: Spawner) {
 
     let (_, mut control, runner) = cyw43::new(state, pwr, spi, fw, nvram).await;
 
-    spawner.spawn(unwrap!(cyw43_task(runner)));
+    spawner.spawn(cyw43_task(runner).expect("Failed to spwan task."));
     control.init(clm).await;
 
     let delay = Duration::from_millis(250);
     loop {
-        info!("led on!");
         control.gpio_set(0, true).await;
         Timer::after(delay).await;
-
-        info!("led off!");
         control.gpio_set(0, false).await;
         Timer::after(delay).await;
     }
