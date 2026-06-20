@@ -6,7 +6,7 @@ use embassy_rp::binary_info;
 use embassy_rp::block::ImageDef;
 use embassy_rp::gpio::{Level, Output};
 use embassy_time::Timer;
-use {defmt_rtt as _, panic_probe as _};
+use panic_probe as _;
 
 #[unsafe(link_section = ".start_block")]
 #[used]
