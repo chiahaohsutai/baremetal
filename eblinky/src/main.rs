@@ -3,14 +3,9 @@
 
 use embassy_executor::Spawner;
 use embassy_rp::binary_info;
-use embassy_rp::block::ImageDef;
 use embassy_rp::gpio::{Level, Output};
 use embassy_time::Timer;
 use panic_probe as _;
-
-#[unsafe(link_section = ".start_block")]
-#[used]
-pub static IMGDEF: ImageDef = ImageDef::secure_exe();
 
 #[unsafe(link_section = ".bi_entries")]
 #[used]
