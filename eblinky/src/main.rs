@@ -17,7 +17,7 @@ pub static METADATA: [binary_info::EntryAddr; 4] = [
 ];
 
 #[embassy_executor::main]
-async fn main(spawner: Spawner) {
+async fn main(_spawner: Spawner) {
     let p = embassy_rp::init(Default::default());
     let mut led = Output::new(p.PIN_13, Level::Low);
 
